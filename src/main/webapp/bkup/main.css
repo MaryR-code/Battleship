@@ -1,0 +1,16 @@
+p {
+    color: darkblue;
+    background-color: aquamarine;
+}
+
+p.fizz {
+    font-size: x-large;
+}
+
+p.fizz.buzz {
+    color: mediumvioletred;
+}
+
+div p {
+    text-decoration: underline;
+}
