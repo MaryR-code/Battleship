@@ -9,10 +9,15 @@ h1 {
 }
 
 .cont {
-    background-image: url('img/submarine.png');
+    background-image: url('../img/submarine.png');
     min-height: 100%;
     background-position: center;
     background-size: cover;
+}
+
+.info {
+    margin-top: 30px;
+    margin-left: 200px;
 }
 
 .box {
@@ -20,12 +25,9 @@ h1 {
     opacity: 30%;
     width: 420px;
     height: 180px;
-    margin-top: 40px;
-    margin-left: 200px;
 }
 
-.info {
-    margin-top: 50px;
-    margin-left: 240px;
+.text {
+    margin-top: 20px;
+    margin-left: 40px;
 }
-
