@@ -10,13 +10,20 @@ public class Game {
         this.player1 = player1;
     }
 
-    public void start(Player player2) throws IllegalAccessException {   // добавился Exception
+    public void start(Player player2) {   // Exception
         if (this.status != GameStatus.INCOMPLETE) {
-            throw new IllegalAccessException("Status: "+this.status);
+            throw new IllegalStateException("Status: "+this.status);
         }
         this.player2 = player2;
         this.status = GameStatus.SETTING_UP;
+    }
 
+    public Player opponentOf(Player player) {
+        if (player == player1) {
+            return player2;
+        } else {
+            return player1;
+        }
     }
 
     public Player getPlayer1() {
@@ -30,4 +37,5 @@ public class Game {
     public GameStatus getStatus() {
         return status;
     }
+
 }

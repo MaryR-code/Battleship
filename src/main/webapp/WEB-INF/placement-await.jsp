@@ -6,7 +6,7 @@
     <meta content="width=device-width, initial-scale=1" name="viewport">
     <link href="https://www.w3schools.com/w3css/4/w3.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Raleway:400,800,900" rel="stylesheet">
-    <title>Battleship - Await</title>
+    <title>Battleship - Placement</title>
 </head>
 <body>
 <div class="w3-display-container" style="min-height: 100%">
@@ -14,7 +14,7 @@
         <div class="w3-contaner w3-padding-large w3-center">
             <h1>Battleship</h1>
             <h2>Hello, ${player.name}!</h2>
-            <h3>Please wait opponent to join</h3>
+            <h3>Please wait opponent to set their ships</h3>
         </div>
     </div>
 </div>

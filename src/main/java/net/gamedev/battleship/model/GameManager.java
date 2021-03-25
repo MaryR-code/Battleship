@@ -6,7 +6,7 @@ public class GameManager {
     public static final String ATTR = "gameManager";
     private Game pending;
 
-    public synchronized Game join(Player player) throws IllegalAccessException {   // первый создает игру, второй присоединяется - опять добавился Exception
+    public synchronized Game join(Player player) {   // первый создает игру, второй присоединяется - Exception
         Game result;
         if (pending == null) {
             pending = new Game(player);

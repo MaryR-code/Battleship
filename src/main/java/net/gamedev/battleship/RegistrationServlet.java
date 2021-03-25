@@ -29,12 +29,7 @@ public class RegistrationServlet extends HttpServlet {
         } else {
             var mgr = (GameManager) request.getServletContext().getAttribute(GameManager.ATTR);
             var player = new Player(playerName);
-            Game game = null;
-            try {
-                game = mgr.join(player);
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            }
+            var game = mgr.join(player);
             request.getSession().setAttribute(Player.ATTR, player);
             request.getSession().setAttribute(Game.ATTR, game);
             openNext(request, response);
@@ -52,8 +47,9 @@ public class RegistrationServlet extends HttpServlet {
         }
     }
 
-    private void openPlacement(HttpServletResponse response) throws IOException {
-        response.sendRedirect("placement");
+    private void openRegistration(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getRequestDispatcher("/WEB-INF/registration.jsp")
+                .forward(request, response);
     }
 
     private void openRegistrationAwait(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -61,8 +57,7 @@ public class RegistrationServlet extends HttpServlet {
                 .forward(request, response);
     }
 
-    private void openRegistration(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/WEB-INF/registration.jsp")
-                .forward(request, response);
+    private void openPlacement(HttpServletResponse response) throws IOException {
+        response.sendRedirect("placement");
     }
 }

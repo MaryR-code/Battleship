@@ -12,7 +12,6 @@
 <div class="w3-display-container" style="min-height: 100%">
     <div class="w3-display-middle w3-card" style="width: 30%">
         <form method="post">
-
             <c:if test="${isPlayerNameIncorrect}">
                 <div class="w3-panel w3-pale-red w3-display-container">
                     <span onclick="this.parentElement.style.display='none'" class="w3-button w3-display-topright"><b>&times;</b></span>
@@ -20,7 +19,6 @@
                     <p>Player name is too short!</p>
                 </div>
             </c:if>
-
             <div class="w3-panel w3-display-container">
                 <label for="playerNameInput" class="w3-padding-small">Enter your name:</label>
             </div>
