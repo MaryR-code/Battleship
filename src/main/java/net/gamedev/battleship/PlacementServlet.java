@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Set;
 
 @WebServlet(name = "PlacementServlet", urlPatterns = "/placement")
@@ -22,23 +21,36 @@ public class PlacementServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        var addresses = req.getParameterValues("addr");     // передаем массив строк
-        System.out.println(Arrays.toString(addresses));
         var player = (Player) req.getSession().getAttribute(Player.ATTR);
-        player.setShips(Set.of(addresses));     // извлекаем из массива Set
+        player.getPlayerField().clear();
+        var addresses = req.getParameterValues("addr");
+        if (addresses == null) {
+            req.setAttribute("incorrectShipsPlacement", true);
+            openPlacement(req, resp);
+            return;
+        }
+        var shipAddresses = Set.of(addresses);
+        player.setShips(shipAddresses);
+        if (!player.isPlayerFieldValid()) {
+            req.setAttribute("incorrectShipsPlacement", true);
+            openPlacement(req, resp);
+            return;
+        }
+        var game = (Game) req.getSession().getAttribute(Game.ATTR);
+        game.checkGameStart();
         openNext(req, resp);
     }
 
     private void openNext(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        var player = (Player) req.getSession().getAttribute(Player.ATTR);
         var game = (Game) req.getSession().getAttribute(Game.ATTR);
+        var player = (Player) req.getSession().getAttribute(Player.ATTR);
         var opponent = game.opponentOf(player);
-        if (!player.isPlayerFieldValid()) {     // дописать
+        if (!player.isPlayerFieldValid()) {
             openPlacement(req, resp);
-        } else if (opponent.isPlayerFieldValid()) {
-            openTurn(req, resp);
-        } else {
+        } else if (!opponent.isPlayerFieldValid()) {
             openPlacementAwait(req, resp);
+        } else {
+            openTurn(req, resp);
         }
     }
 
@@ -50,6 +62,7 @@ public class PlacementServlet extends HttpServlet {
         req.getRequestDispatcher("/WEB-INF/placement-await.jsp")
                 .forward(req, resp);
     }
+
 
     private void openPlacement(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.getRequestDispatcher("/WEB-INF/placement.jsp")
