@@ -11,7 +11,7 @@ public class Game {
         this.player1 = player1;
     }
 
-    public void start(Player player2) {   // Exception
+    public void start(Player player2) {
         if (this.status != GameStatus.INCOMPLETE) {
             throw new IllegalStateException("Status: "+this.status);
         }
