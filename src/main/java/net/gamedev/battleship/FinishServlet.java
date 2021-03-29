@@ -22,7 +22,7 @@ public class FinishServlet extends HttpServlet {
         var game = (Game) req.getSession().getAttribute(Game.ATTR);
         game = null;
         req.getSession().setAttribute(Game.ATTR, game);
-        openRegistration(req, resp);
+        openRegistration(resp);
     }
 
     private void openNext(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -44,9 +44,7 @@ public class FinishServlet extends HttpServlet {
                 forward(req, resp);
     }
 
-    private void openRegistration(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-       // req.getRequestDispatcher("/WEB-INF/registration.jsp")
-       //         .forward(req, resp);
-        resp.sendRedirect("registration");
+    private void openRegistration(HttpServletResponse resp) throws IOException {
+       resp.sendRedirect("registration");
     }
 }
