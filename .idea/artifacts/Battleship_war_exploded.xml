@@ -14,6 +14,7 @@
           <element id="module-output" name="Battleship" />
         </element>
         <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: com.h2database:h2:1.4.199" />
           <element id="library" level="project" name="Maven: javax.servlet:jstl:1.2" />
         </element>
       </element>
